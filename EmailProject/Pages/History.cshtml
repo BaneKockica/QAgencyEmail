@@ -1,0 +1,58 @@
+﻿@page
+@model EmailProject.Pages.HistoryModel
+@{
+    ViewData["Title"] = "History";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                From email address
+            </th>
+            <th>
+                To email address
+            </th>
+            <th>
+                CC email addresses
+            </th>
+            <th>
+                Subject
+            </th>
+            <th>
+                Importance
+            </th>
+            <th>
+                EmailContent
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Emails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromEmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToEmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CcemailAddresses)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImportanceNavigation.ImportanceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailContent)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

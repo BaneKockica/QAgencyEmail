@@ -1,0 +1,71 @@
+﻿@page
+@model EmailProject.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>New email</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email.FromEmailAddress" class="control-label">From email address</label>
+                <input asp-for="Email.FromEmailAddress" class="form-control" type="email" pattern="^[a-zA-Z0-9._+-]+@("@")[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" />
+                <span asp-validation-for="Email.FromEmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email.ToEmailAddress" class="control-label">To email address</label>
+                <input asp-for="Email.ToEmailAddress" class="form-control" type="email" pattern="^[a-zA-Z0-9._+-]+@("@")[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" />
+                <span asp-validation-for="Email.ToEmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email.CcemailAddresses" class="control-label">CC email addresses</label>
+                <input id="ccEmailAddresses" asp-for="Email.CcemailAddresses" class="form-control" />
+                <span asp-validation-for="Email.CcemailAddresses" class="text-danger"></span>
+                
+                <p class="text-danger">
+                    @ViewData["Message"]
+                </p>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email.Subject" class="control-label">Subject</label>
+                <input asp-for="Email.Subject" class="form-control" />
+                <span asp-validation-for="Email.Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email.Importance" class="control-label">Importance</label>
+                <select asp-for="Email.Importance" class="form-control"
+                        asp-items="@Model.ImportancesEmail">
+                </select>
+                <span asp-validation-for="Email.Importance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email.EmailContent" class="control-label">Content</label>
+                <input asp-for="Email.EmailContent" class="form-control" />
+                <span asp-validation-for="Email.EmailContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+                <input type="submit" value="Cancel" class="btn btn-secondary" onclick="return confirmation()"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function confirmation() {
+        if (confirm("Are you sure?") == true) {
+            document.getElementById('ccEmailAddresses').value = '';
+        } else {
+            return false;
+        }
+        return x;
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
